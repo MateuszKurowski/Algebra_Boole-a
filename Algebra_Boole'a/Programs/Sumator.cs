@@ -41,5 +41,56 @@ namespace Algebra_Boole_a.Programs
             }
             MainMenu();
         }
+
+        public static void AllPossibilities()
+        {
+            int parity = 0;
+            int trials = 0;
+            List<string> binary = Addons.Constants.BinaryInput();
+
+            Program.DisplayMenuTitle(1);
+            WriteLine();
+
+            foreach (string variable in binary)
+            {
+                int baseOfSum = Convert.ToInt32(variable, 2);
+                for (int i = 0; i < binary.Count; i++)
+                {
+                    if (parity % 2 == 0)
+                        ForegroundColor = ConsoleColor.DarkGreen;
+                    else ForegroundColor = ConsoleColor.DarkCyan;
+                    Write(variable);
+                    ForegroundColor = ConsoleColor.White;
+                    Write(" + " + binary[i] + " = ");
+                    int targetOfSum = Convert.ToInt32(binary[i], 2);
+                    string result = Convert.ToString(baseOfSum + targetOfSum, 2).PadLeft(4, '0');
+                    if (result.Length > 4)
+                    {
+                        result = result.Remove(0, result.Length - 4);
+                        Write(result);
+                        ForegroundColor = ConsoleColor.DarkRed;
+                        WriteLine(" [Overflow]");
+                        ForegroundColor = ConsoleColor.White;
+                    }
+                    else WriteLine(result);
+
+                    trials++;
+                }
+                parity++;
+            }
+            WriteLine("-----------------------------");
+
+            if (trials == 1)
+                WriteLine($"Wykonano: {trials} raz!");
+            else WriteLine($"Wykonano: {trials} razy!");
+
+            WriteLine();
+            WriteLine();
+            ForegroundColor = ConsoleColor.DarkGray;
+            WriteLine("Naciśnij dowolny klawisz by wrócić do menu głównego.");
+            ForegroundColor = ConsoleColor.White;
+            Console.ReadKey();
+            Program.Main();
+        }
     }
 }

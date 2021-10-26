@@ -14,6 +14,8 @@ namespace Algebra_Boole_a
         /// </summary>
         public static void Main()
         {
+            Programs.Sumator.AllPossibilities();
+
             DisplayMenuTitle(0);
 
             WindowWidth = 80;
