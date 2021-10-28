@@ -70,8 +70,20 @@ namespace Algebra_Boole_a.Programs
                 Write("): ");
             }
 
-
+            Clear();
+            Program.DisplayMenuTitle(1);
             WriteLine();
+
+            //WriteLine($"")
+
+            Write("Podaj pierwszą drugą: ");
+            while (true)
+            {
+
+            }
+
+
+                WriteLine();
             WriteLine("Koniec kurwa");
             ReadKey();
         }
