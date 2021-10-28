@@ -6,4 +6,12 @@
     <RootNamespace>Algebra_Boole_a</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\KaMeR\source\repos\Algebra_Boole%27a\Algebra_Boole%27a\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\KaMeR\source\repos\Algebra_Boole'a\Algebra_Boole'a\.editorconfig" />
+  </ItemGroup>
+
 </Project>
