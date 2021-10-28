@@ -14,8 +14,8 @@ namespace Algebra_Boole_a
         /// </summary>
         public static void Main()
         {
-            //Algebra_Boole_a.Programs.Sumator.ManualTest();
-            //return;
+            Algebra_Boole_a.Programs.Sumator.ManualTest();
+            return;
 
             DisplayMenuTitle(0);
 

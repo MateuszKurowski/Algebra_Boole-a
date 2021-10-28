@@ -44,13 +44,15 @@ namespace Algebra_Boole_a.Programs
 
         public static void ManualTest()
         {
+            string firstBinary = string.Empty;
+            string secondBinary = string.Empty;
             Program.DisplayMenuTitle(1);
             WriteLine();
 
             Write("Podaj pierwszą cyfrę: ");
             while(true)
             {
-                string firstBinary = ReadLine();
+                firstBinary = ReadLine();
                 if(firstBinary.Length == 4)
                 {
                     break;
@@ -74,12 +76,31 @@ namespace Algebra_Boole_a.Programs
             Program.DisplayMenuTitle(1);
             WriteLine();
 
-            //WriteLine($"")
+            WriteLine();
+            WriteLine();
+            WriteLine();
 
-            Write("Podaj pierwszą drugą: ");
+            Write("Podaj drugą cyfrę: ");
             while (true)
             {
+                secondBinary = ReadLine();
+                if (secondBinary.Length == 4)
+                {
+                    break;
+                }
 
+                Clear();
+                Program.DisplayMenuTitle(1);
+                WriteLine();
+
+                ForegroundColor = ConsoleColor.DarkGray;
+                WriteLine("Wprowadzono błędne dane!");
+                ForegroundColor = ConsoleColor.White;
+                Write("Podaj drugą cyfrę (");
+                ForegroundColor = ConsoleColor.DarkRed;
+                Write("binarną, czterobitową");
+                ForegroundColor = ConsoleColor.White;
+                Write("): ");
             }
 
 
