@@ -29,10 +29,10 @@ namespace Algebra_Boole_a.Programs
             switch (keyPressed)
             {
                 case ConsoleKey.D1:
-                    //
+                    ManualTest();
                     break;
                 case ConsoleKey.D2:
-                    //
+                    AllPossibilities();
                     break;
                 case ConsoleKey.D3:
                 case ConsoleKey.Escape:
@@ -42,7 +42,42 @@ namespace Algebra_Boole_a.Programs
             MainMenu();
         }
 
-        public static void AllPossibilities()
+        public static void ManualTest()
+        {
+            Program.DisplayMenuTitle(1);
+            WriteLine();
+
+            Write("Podaj pierwszą cyfrę: ");
+            while(true)
+            {
+                string firstBinary = ReadLine();
+                if(firstBinary.Length == 4)
+                {
+                    break;
+                }
+
+                Clear();
+                Program.DisplayMenuTitle(1);
+                WriteLine();
+
+                ForegroundColor = ConsoleColor.DarkGray;
+                WriteLine("Wprowadzono błędne dane!");
+                ForegroundColor = ConsoleColor.White;
+                Write("Podaj pierwszą cyfrę (");
+                ForegroundColor = ConsoleColor.DarkRed;
+                Write("binarną, czterobitową");
+                ForegroundColor = ConsoleColor.White;
+                Write("): ");
+            }
+
+
+            WriteLine();
+            WriteLine("Koniec kurwa");
+            ReadKey();
+        }
+
+
+        private static void AllPossibilities()
         {
             int parity = 0;
             int trials = 0;
