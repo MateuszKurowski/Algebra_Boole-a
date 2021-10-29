@@ -60,7 +60,7 @@ namespace Algebra_Boole_a.Programs
             string firstInput;
             while (true)
             {
-                firstInput = ReadLine();
+                firstInput = ReadLine().Trim();
                 if (firstInput.Length == 4)
                 {
                     if (int.TryParse(firstInput, out _))

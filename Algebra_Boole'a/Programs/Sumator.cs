@@ -56,7 +56,7 @@ namespace Algebra_Boole_a.Programs
             string firstInput;
             while (true)
             {
-                firstInput = ReadLine();
+                firstInput = ReadLine().Trim();
                 if (firstInput.Length == 4)
                 {
                     if (int.TryParse(firstInput, out _))
@@ -86,7 +86,7 @@ namespace Algebra_Boole_a.Programs
             string secondInput;
             while (true)
             {
-                secondInput = ReadLine();
+                secondInput = ReadLine().Trim();
                 if (secondInput.Length == 4)
                 {
                     if (int.TryParse(secondInput, out _))
