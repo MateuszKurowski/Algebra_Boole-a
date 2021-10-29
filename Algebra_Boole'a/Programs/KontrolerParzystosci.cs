@@ -153,6 +153,7 @@ namespace Algebra_Boole_a.Programs
                 WriteLine();
                 trials++;
             }
+            ForegroundColor = ConsoleColor.White;
             WriteLine("-----------------------------");
 
             if (trials == 1)
