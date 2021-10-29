@@ -5,7 +5,7 @@ namespace Algebra_Boole_a.Addons
     /// <summary>
     /// Zwraca stałe
     /// </summary>
-    public class Constants
+    public static class Constants
     {
         /// <summary>
         /// Zwraca listę wszystkich możliwości na 4 bitach
@@ -32,6 +32,15 @@ namespace Algebra_Boole_a.Addons
                 "1110",
                 "1111"
             };
+        }
+
+        /// <summary>
+        /// Lista kontrolna cyfr poza 0 lub 1
+        /// </summary>
+        /// <returns>Lista kontrolna w psotaci wyrażenia string</returns>
+        public static string BinaryStringValidate()
+        {
+            return "[2-9]+";
         }
     }
 }

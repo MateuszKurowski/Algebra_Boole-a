@@ -1,26 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static System.Console;
 
 namespace Algebra_Boole_a.Programs
 {
-    class Sumator
+    /// <summary>
+    /// Sumator 4 bitowy dwóch liczb binarnych
+    /// </summary>
+    internal static class Sumator
     {
+        /// <summary>
+        /// Menu
+        /// </summary>
         public static void MainMenu()
         {
             Program.DisplayMenuTitle(1);
 
             WindowWidth = 80;
-            SetCursorPosition((70 / 2), 12);
+            SetCursorPosition(70 / 2, 12);
             WriteLine("Menu");
-            SetCursorPosition((30 / 2), 14);
+            SetCursorPosition(30 / 2, 14);
             WriteLine("1. Ręczny test.");
-            SetCursorPosition((30 / 2), 15);
+            SetCursorPosition(30 / 2, 15);
             WriteLine("2. Wszystkie możliwości.");
-            SetCursorPosition((30 / 2), 16);
+            SetCursorPosition(30 / 2, 16);
             WriteLine("3. Powrót.");
 
             ConsoleKeyInfo keyInfo = ReadKey(true);
@@ -31,9 +34,11 @@ namespace Algebra_Boole_a.Programs
                 case ConsoleKey.D1:
                     ManualTest();
                     break;
+
                 case ConsoleKey.D2:
                     AllPossibilities();
                     break;
+
                 case ConsoleKey.D3:
                 case ConsoleKey.Escape:
                     Program.Main();
@@ -42,26 +47,31 @@ namespace Algebra_Boole_a.Programs
             MainMenu();
         }
 
-        public static void ManualTest()
+        /// <summary>
+        /// Test ręczny
+        /// </summary>
+        private static void ManualTest()
         {
-            string firstBinary = string.Empty;
-            string secondBinary = string.Empty;
-            Program.DisplayMenuTitle(1);
-            WriteLine();
-
-            Write("Podaj pierwszą cyfrę: ");
-            while(true)
+            DisplayFirst(1);
+            string firstInput;
+            while (true)
             {
-                firstBinary = ReadLine();
-                if(firstBinary.Length == 4)
+                firstInput = ReadLine();
+                if (firstInput.Length == 4)
                 {
-                    break;
+                    if (int.TryParse(firstInput, out _))
+                    {
+                        if (!System.Text.RegularExpressions.Regex.IsMatch(firstInput, Addons.Constants.BinaryStringValidate()))
+                        {
+                            break;
+                        }
+                    }
                 }
 
                 Clear();
                 Program.DisplayMenuTitle(1);
-                WriteLine();
 
+                SetCursorPosition(0, 13);
                 ForegroundColor = ConsoleColor.DarkGray;
                 WriteLine("Wprowadzono błędne dane!");
                 ForegroundColor = ConsoleColor.White;
@@ -72,27 +82,29 @@ namespace Algebra_Boole_a.Programs
                 Write("): ");
             }
 
-            Clear();
-            Program.DisplayMenuTitle(1);
-            WriteLine();
-
-            WriteLine();
-            WriteLine();
-            WriteLine();
-
-            Write("Podaj drugą cyfrę: ");
+            DisplayFirst(2, firstInput);
+            string secondInput;
             while (true)
             {
-                secondBinary = ReadLine();
-                if (secondBinary.Length == 4)
+                secondInput = ReadLine();
+                if (secondInput.Length == 4)
                 {
-                    break;
+                    if (int.TryParse(secondInput, out _))
+                    {
+                        if (!System.Text.RegularExpressions.Regex.IsMatch(secondInput, Addons.Constants.BinaryStringValidate()))
+                        {
+                            break;
+                        }
+                    }
                 }
 
                 Clear();
                 Program.DisplayMenuTitle(1);
+                SetCursorPosition(0, 11);
+                WriteLine(firstInput + " + ");
                 WriteLine();
 
+                SetCursorPosition(0, 13);
                 ForegroundColor = ConsoleColor.DarkGray;
                 WriteLine("Wprowadzono błędne dane!");
                 ForegroundColor = ConsoleColor.White;
@@ -103,13 +115,66 @@ namespace Algebra_Boole_a.Programs
                 Write("): ");
             }
 
+            Clear();
+            Program.DisplayMenuTitle(1);
 
-                WriteLine();
-            WriteLine("Koniec kurwa");
-            ReadKey();
+            int sum1 = Convert.ToInt32(firstInput, 2);
+            int sum2 = Convert.ToInt32(secondInput, 2);
+            string result = Convert.ToString(sum1 + sum2, 2).PadLeft(4, '0');
+
+            SetCursorPosition(0, 11);
+            if (result.Length == 4)
+            {
+                WriteLine(firstInput + " + " + secondInput + " = " + result);
+            }
+            else
+            {
+                Write(firstInput + " + " + secondInput + " = " + result.Remove(0, result.Length - 4));
+                ForegroundColor = ConsoleColor.Red;
+                WriteLine(" [Overflow] => " + result);
+                ForegroundColor = ConsoleColor.White;
+            }
+
+            SetCursorPosition(0, 13);
+            WriteLine("Wynik w systemie decymalnym: " + (sum1 + sum2));
+
+            WriteLine();
+            WriteLine();
+            ForegroundColor = ConsoleColor.DarkGray;
+            WriteLine("Naciśnij dowolny klawisz by wrócić do menu głównego.");
+            ForegroundColor = ConsoleColor.White;
+            Console.ReadKey();
+            Program.Main();
         }
 
+        /// <summary>
+        /// Wyświetla ponowny test
+        /// </summary>
+        /// <param name="x">Numer cyfry input</param>
+        /// <param name="firstBinary">pierwszy input</param>
+        private static void DisplayFirst(int x, string firstBinary = null)
+        {
+            Clear();
+            Program.DisplayMenuTitle(1);
 
+            if (x == 1)
+            {
+                SetCursorPosition(0, 14);
+                Write("Podaj pierwszą cyfrę: ");
+            }
+            else if (x == 2)
+            {
+                SetCursorPosition(0, 11);
+                WriteLine(firstBinary + " + ");
+
+                SetCursorPosition(0, 14);
+                Write("Podaj drugą cyfrę: ");
+            }
+        }
+
+        /// <summary>
+        /// Wszystkie możliwości
+        /// </summary>
         private static void AllPossibilities()
         {
             int parity = 0;
@@ -124,9 +189,7 @@ namespace Algebra_Boole_a.Programs
                 int baseOfSum = Convert.ToInt32(variable, 2);
                 for (int i = 0; i < binary.Count; i++)
                 {
-                    if (parity % 2 == 0)
-                        ForegroundColor = ConsoleColor.DarkGreen;
-                    else ForegroundColor = ConsoleColor.DarkCyan;
+                    ForegroundColor = parity % 2 == 0 ? ConsoleColor.DarkGreen : ConsoleColor.DarkCyan;
                     Write(variable);
                     ForegroundColor = ConsoleColor.White;
                     Write(" + " + binary[i] + " = ");
@@ -140,7 +203,10 @@ namespace Algebra_Boole_a.Programs
                         WriteLine(" [Overflow]");
                         ForegroundColor = ConsoleColor.White;
                     }
-                    else WriteLine(result);
+                    else
+                    {
+                        WriteLine(result);
+                    }
 
                     trials++;
                 }
@@ -150,7 +216,8 @@ namespace Algebra_Boole_a.Programs
 
             if (trials == 1)
                 WriteLine($"Wykonano: {trials} raz!");
-            else WriteLine($"Wykonano: {trials} razy!");
+            else
+                WriteLine($"Wykonano: {trials} razy!");
 
             WriteLine();
             WriteLine();

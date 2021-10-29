@@ -7,11 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EditorConfigFiles Remove="C:\Users\KaMeR\source\repos\Algebra_Boole%27a\Algebra_Boole%27a\.editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="C:\Users\KaMeR\source\repos\Algebra_Boole'a\Algebra_Boole'a\.editorconfig" />
+    <Compile Remove="Algebra_Boole%27a\**" />
+    <EmbeddedResource Remove="Algebra_Boole%27a\**" />
+    <None Remove="Algebra_Boole%27a\**" />
   </ItemGroup>
 
 </Project>

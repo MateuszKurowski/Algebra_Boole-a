@@ -1,6 +1,9 @@
 ﻿namespace Algebra_Boole_a.Addons
 {
-    class Addons
+    /// <summary>
+    /// Metody/Klasy dodatkowe globalne
+    /// </summary>
+    internal class Addons
     {
     }
 }
